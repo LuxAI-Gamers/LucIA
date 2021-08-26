@@ -1,7 +1,7 @@
 import sys
 import math
 
-from behaviour_tree import Task
+from behaviour_trees import Task
 
 
 class CanAct(Task):
@@ -10,5 +10,5 @@ class CanAct(Task):
         super(CanAct, self).__init__()
 
     def run(self):
-        unit = self.blackboard.get_value('unit')
+        unit = self._blackboard.get_value('unit')
         return True if unit.can_act() else False

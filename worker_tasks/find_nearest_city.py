@@ -1,7 +1,7 @@
 import sys
 import math
 
-from behaviour_tree import Task
+from behaviour_trees import Task
 
 
 class FindNearestCity(Task):
@@ -12,11 +12,11 @@ class FindNearestCity(Task):
 
 
     def run(self):
-        unit = self.blackboard.get_value('unit')
-        player = self.blackboard.get_value('player')
+        unit = self._blackboard.get_value('unit')
+        player = self._blackboard.get_value('player')
 
-        close_city = find_closest_city(player,unit)
-        self.blackboard.set('close_city',close_city)
+        close_city = self.find_closest_city(player, unit)
+        self._blackboard.set('position', close_city)
 
         return True if close_city else False
 

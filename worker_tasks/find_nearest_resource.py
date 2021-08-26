@@ -7,31 +7,31 @@ from lux.constants import Constants
 from lux.game_constants import GAME_CONSTANTS
 from lux import annotate
 
-from behaviour_tree import Task
+from behaviour_trees import Task
 
 
 class FindNearestResource(Task):
 
     def __init__(self):
-        super(FindNearestCity, self).__init__()
+        super(FindNearestResource, self).__init__()
 
 
     def run(self):
         """
         """
-        unit = self.blackboard.get_value('unit')
-        player = self.blackboard.get_value('player')
-        game_state = self.blackboard.get_value('game_state')
+        unit = self._blackboard.get_value('unit')
+        player = self._blackboard.get_value('player')
+        game_state = self._blackboard.get_value('game_state')
 
         tiles_resource = self.find_all_resources(game_state)
-        close_resource = self.find_closest_resource(unit, player, tiles)
+        close_resource = self.find_closest_resource(unit, player, tiles_resource)
 
-        self.blackboard.set_value('nearest_resource',close_resource)
+        self._blackboard.set_value('position',close_resource)
 
         return True if close_resource else False
 
 
-    def find_all_resources(self,game_state):
+    def find_all_resources(self, game_state):
         """
         """
         resource_tiles = []

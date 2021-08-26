@@ -7,6 +7,7 @@ from lux.game_constants import GAME_CONSTANTS
 from lux import annotate
 
 from worker_tasks.behaviour_trees import *
+from workers import dumb_worker
 
 
 DIRECTIONS = Constants.DIRECTIONS

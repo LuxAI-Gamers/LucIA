@@ -37,6 +37,17 @@ class Task:
         self._children.append(child)
         return child
 
+    def print(self):
+
+        name = self.__class__.__name__
+
+        children = {}
+        for index, child in enumerate(self._children):
+            for key, val in child.print().items():
+                children[f'{key}_{index}'] = val
+
+        return {name: children}
+
 
 class Selector(Task):
     """

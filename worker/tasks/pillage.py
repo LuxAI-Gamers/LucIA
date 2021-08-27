@@ -15,7 +15,7 @@ class Pillage(Task):
 
         pillage = object.pillage()
         if pillage:
-            actions = self._blackboard.append_value('actions',pillage)
+            actions = self._blackboard.append_values(actions=pillage)
             return True
 
         return False

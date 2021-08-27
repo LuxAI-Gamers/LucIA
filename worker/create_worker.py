@@ -22,10 +22,10 @@ def create_dumb_worker():
     back_to_city_seq.add_child(FindNearestCity())
     back_to_city_seq.add_child(MoveToPosition())
     collect_seq.add_child(FindNearestResource())
-    collect_seq = collect_seq.add_child(Selector())
+    collect_sel = collect_seq.add_child(Selector())
 
     # 3rd level
-    collect_seq.add_child(Pillage())
-    collect_seq.add_child(MoveToPosition())
+    collect_sel.add_child(MoveToPosition())
+    collect_sel.add_child(Pillage())
 
     return root

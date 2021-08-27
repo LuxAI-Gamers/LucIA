@@ -22,7 +22,7 @@ class FindNearestResource(Task):
 
         tiles_resource = self.find_all_resources(map, width, height)
         close_resource = self.find_closest_resources(object, player)
-        self._blackboard.set_value('position',close_resource)
+        self._blackboard.set_values(position=close_resource.pos)
 
         return True if close_resource else False
 

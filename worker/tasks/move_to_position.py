@@ -18,7 +18,7 @@ class MoveToPosition(Task):
 
         # If object in the position of interest then don't move
         if direction != Constants.DIRECTIONS.CENTER:
-            actions = self._blackboard.append_value('actions',movement)
+            actions = self._blackboard.append_values(actions=movement)
             return True
         else:
             return False

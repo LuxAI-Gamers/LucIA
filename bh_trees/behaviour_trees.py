@@ -12,15 +12,11 @@ class BlackBoard(metaclass=Singleton):
     """
     """
     def __init__(self,**kwargs):
-
         self._memory = {}
 
+    def set_values(self, **kwargs):
         for key,val in kwargs.items():
-            if key not in self._memory:
-                self._memory[key] = val
-
-    def set_value(self, key, val):
-        self._memory[key] = val
+            self._memory[key] = val
 
     def get_value(self, key):
         return self._memory[key]
@@ -28,8 +24,9 @@ class BlackBoard(metaclass=Singleton):
     def reset_memory(self):
         self._memory = {}
 
-    def append_value(self, key, val):
-        self._memory[key].append(val)
+    def append_values(self, **kwargs):
+        for key,val in kwargs.items():
+            self._memory[key].append(val)
 
 
 

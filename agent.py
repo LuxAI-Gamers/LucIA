@@ -1,4 +1,6 @@
-import math, sys
+import gc
+import sys
+import math
 
 from lux.game import Game
 from lux.game_map import Cell, RESOURCE_TYPES
@@ -12,10 +14,11 @@ from worker import create_dumb_worker
 
 DIRECTIONS = Constants.DIRECTIONS
 game_state = None
-
+bb = BlackBoard()
 
 def agent(observation, configuration):
     global game_state
+    global bb
 
     ### Do not edit ###
     if observation["step"] == 0:
@@ -28,30 +31,27 @@ def agent(observation, configuration):
         game_state._update(observation["updates"])
 
     ### AI Code goes down here! ###
-    bb.reset_memory()
-    del bb
-    bb = BlackBoard(id = game_state.id,
-                    map = game_state.map,
-                    turn = game_state.turn,
-                    width = game_state.map_width,
-                    height = game_state.map.height,
-                    player = game_state.players[observation.player],
-                    actions = []
-                    )
+    bb.set_values(id = game_state.id,
+                  map = game_state.map,
+                  turn = game_state.turn,
+                  width = game_state.map_width,
+                  height = game_state.map.height,
+                  player = game_state.players[observation.player],
+                  actions = []
+                  )
+
     worker = create_dumb_worker()
 
-    if game_state.turn>5:
-        exit()
 
     for city in bb.get_value('player').cities:
-        bb.set_value('object', city)
+        bb.set_values(object=city)
 
     for unit in bb.get_value('player').units:
-        bb.set_value('object', unit)
+        bb.set_values(object=unit)
         worker.run()
 
     actions = bb.get_value('actions')
-    del bb
+
     return actions
 
 
@@ -69,6 +69,6 @@ if __name__=='__main__':
     steps = env.run([agent, "simple_agent"])
     print([step[0]['action'] for step in steps])
 
-    replay = env.toJSON()
-    with open("replay.json", "w") as f:
-        json.dump(replay, f)
+#    replay = env.toJSON()
+#    with open("replay.json", "w") as f:
+#        json.dump(replay, f)

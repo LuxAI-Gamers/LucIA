@@ -16,7 +16,7 @@ class FindNearestCity(Task):
         player = self._blackboard.get_value('player')
 
         close_city = self.find_closest_city(player, object)
-        self._blackboard.set_value('position', close_city.pos)
+        self._blackboard.set_values(position=close_city.pos)
 
         return True if close_city else False
 

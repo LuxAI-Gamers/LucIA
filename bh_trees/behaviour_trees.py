@@ -21,9 +21,14 @@ class BlackBoard(metaclass=Singleton):
     def set_value(self, key, val):
         self._memory[key] = val
 
-
     def get_value(self, key):
         return self._memory[key]
+
+    def reset_memory(self):
+        self._memory = {}
+
+    def append_value(self, key, val):
+        self._memory[key].append(val)
 
 
 class Task:

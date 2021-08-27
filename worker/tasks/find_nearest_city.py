@@ -12,16 +12,16 @@ class FindNearestCity(Task):
 
 
     def run(self):
-        unit = self._blackboard.get_value('unit')
+        object = self._blackboard.get_value('object')
         player = self._blackboard.get_value('player')
 
-        close_city = self.find_closest_city(player, unit)
+        close_city = self.find_closest_city(player, object)
         self._blackboard.set('position', close_city)
 
         return True if close_city else False
 
 
-    def find_closest_city(self, player, unit):
+    def find_closest_city(self, player, object):
 
         closest_city_tile = None
         if len(player.cities) > 0:
@@ -29,7 +29,7 @@ class FindNearestCity(Task):
 
             for k, city in player.cities.items():
                 for city_tile in city.citytiles:
-                    dist = city_tile.pos.distance_to(unit.pos)
+                    dist = city_tile.pos.distance_to(object.pos)
                     if dist < closest_dist:
                         closest_dist = dist
                         closest_city_tile = city_tile

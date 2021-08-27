@@ -10,5 +10,5 @@ class IsCargoFull(Task):
         super(IsCargoFull, self).__init__()
 
     def run(self):
-        unit = self._blackboard.get_value('unit')
-        return True if unit.get_cargo_space_left()==0 else False
+        object = self._blackboard.get_value('object')
+        return True if object.get_cargo_space_left()==0 else False

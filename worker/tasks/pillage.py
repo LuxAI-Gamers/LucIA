@@ -11,5 +11,14 @@ class Pillage(Task):
         super(Pillage, self).__init__()
 
     def run(self):
-        unit = self._blackboard.get_value('unit')
-        return True if unit.pillage() else False
+        object = self._blackboard.get_value('object')
+
+        pillage = object.pillage()
+        if pillage:
+            actions = self._blackboard.get_value('actions')
+            actions.append(pillage)
+            self._blackboard.set_value('actions', actions)
+            print('PILLAGE: ', pillage)
+            return True
+
+        return False

@@ -15,19 +15,19 @@ class FindNearestResource(Task):
         """
         """
         map = self._blackboard.get_value('map')
-        unit = self._blackboard.get_value('unit')
+        object = self._blackboard.get_value('object')
         width = self._blackboard.get_value('width')
         height = self._blackboard.get_value('height')
         player = self._blackboard.get_value('player')
 
         tiles_resource = self.find_all_resources(map, width, height)
-        close_resource = self.find_closest_resource(unit, player, tiles_resource)
+        close_resource = self.find_closest_resources(object, player)
         self._blackboard.set_value('position',close_resource)
 
         return True if close_resource else False
 
 
-    def find_all_resources(self, map):
+    def find_all_resources(self, map, height, width):
         """
         """
         resource_tiles = []
@@ -40,7 +40,7 @@ class FindNearestResource(Task):
         self._resource_tiles = resource_tiles
 
 
-    def find_closest_resources(self, unit, player):
+    def find_closest_resources(self, object, player):
         """
         """
         closest_dist = math.inf
@@ -55,7 +55,7 @@ class FindNearestResource(Task):
                 and not player.researched_uranium()):
                 continue
 
-            dist = resource_tile.pos.distance_to(unit.pos)
+            dist = resource_tile.pos.distance_to(object.pos)
             if dist < closest_dist:
                 closest_dist = dist
                 closest_resource_tile = resource_tile

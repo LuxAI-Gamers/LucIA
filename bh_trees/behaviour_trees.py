@@ -1,3 +1,4 @@
+import threading
 
 class Singleton(type):
     _instances = {}
@@ -29,6 +30,7 @@ class BlackBoard(metaclass=Singleton):
 
     def append_value(self, key, val):
         self._memory[key].append(val)
+
 
 
 class Task:

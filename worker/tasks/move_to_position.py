@@ -2,7 +2,7 @@ import sys
 import math
 
 from bh_trees import Task
-from lux import constants
+from lux.constants import Constants
 
 
 class MoveToPosition(Task):
@@ -17,11 +17,8 @@ class MoveToPosition(Task):
         movement = object.move(direction)
 
         # If object in the position of interest then don't move
-        if direction != constants.DIRECTIONS.CENTER:
-            actions = self._blackboard.get_value('actions')
-            actions.append(movement)
-            self._blackboard.set_value('actions', actions)
-            print('MOVE TO POSITION: ', movement)
+        if direction != Constants.DIRECTIONS.CENTER:
+            actions = self._blackboard.append_value('actions',movement)
             return True
         else:
             return False

@@ -1,7 +1,7 @@
 import sys
 import math
 
-from behaviour_trees import Task
+from .behaviour_trees import Task
 
 
 class Pillage(Task):

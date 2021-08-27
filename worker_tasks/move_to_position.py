@@ -1,7 +1,7 @@
 import sys
 import math
 
-from behaviour_trees import Task
+from .behaviour_trees import Task
 from lux import constants
 
 
@@ -17,7 +17,7 @@ class MoveToPosition(Task):
         movement = unit.move(direction)
 
         # If unit in the position of interest then don't move
-        if direction != constants.DIRECTIONS.CENTER: 
+        if direction != constants.DIRECTIONS.CENTER:
             actions = self._blackboard.get_value('actions')
             actions.append(movement)
             self._blackboard.set_value('actions', actions)

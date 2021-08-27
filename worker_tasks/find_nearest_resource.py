@@ -1,13 +1,8 @@
 import sys
 import math
 
-from lux.game import Game
-from lux.game_map import Cell, RESOURCE_TYPES
 from lux.constants import Constants
-from lux.game_constants import GAME_CONSTANTS
-from lux import annotate
-
-from behaviour_trees import Task
+from .behaviour_trees import Task
 
 
 class FindNearestResource(Task):
@@ -19,25 +14,26 @@ class FindNearestResource(Task):
     def run(self):
         """
         """
+        map = self._blackboard.get_value('map')
         unit = self._blackboard.get_value('unit')
+        width = self._blackboard.get_value('width')
+        height = self._blackboard.get_value('height')
         player = self._blackboard.get_value('player')
-        game_state = self._blackboard.get_value('game_state')
 
-        tiles_resource = self.find_all_resources(game_state)
+        tiles_resource = self.find_all_resources(map, width, height)
         close_resource = self.find_closest_resource(unit, player, tiles_resource)
-
         self._blackboard.set_value('position',close_resource)
 
         return True if close_resource else False
 
 
-    def find_all_resources(self, game_state):
+    def find_all_resources(self, map):
         """
         """
         resource_tiles = []
-        for y in range(game_state.map_height):
-            for x in range(game_state.map_width):
-                cell = game_state.map.get_cell(x, y)
+        for y in range(height):
+            for x in range(width):
+                cell = map.get_cell(x, y)
                 if cell.has_resource():
                     resource_tiles.append(cell)
 

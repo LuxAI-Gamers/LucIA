@@ -8,10 +8,9 @@ from worker_tasks.move_to_position import MoveToPosition
 from worker_tasks.pillage import Pillage
 
 
-def dumb_worker():
+def create_dumb_worker():
 
-
-    tree = Selector()
+    root = Selector()
 
     # 1st level
     first = root.add_child(Inverter())
@@ -30,4 +29,4 @@ def dumb_worker():
     collect_seq.add_child(Pillage())
     collect_seq.add_child(MoveToPosition())
 
-    return tree
+    return root

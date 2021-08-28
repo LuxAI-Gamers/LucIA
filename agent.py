@@ -44,7 +44,8 @@ def agent(observation, configuration):
 
 
     for city in bb.get_value('player').cities:
-        bb.set_values(object=city)
+        for city_tile in city:
+            bb.set_values(object=city)
 
     for unit in bb.get_value('player').units:
         bb.set_values(object=unit)

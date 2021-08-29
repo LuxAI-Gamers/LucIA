@@ -10,7 +10,6 @@ class IsEnoughtFuel(Task):
     def __init__(self):
         super(IsEnoughtFuel, self).__init__()
 
-
     def run(self):
 
         LIGHT_UPKEEP=GAME_CONSTANTS['PARAMETERS']['LIGHT_UPKEEP']
@@ -24,7 +23,7 @@ class IsEnoughtFuel(Task):
         n_carts = len([i for i in units if i.is_cart()])
         n_workers = len([i for i in units if i.is_worker()])
 
-        needed_fuel = n_tiles * LIGHT_UPKEEP['CITY'] + \
+        needed_fuel = (LIGHT_UPKEEP['CITY'] - 5 * n_tiles) + \
                       n_workers * LIGHT_UPKEEP['WORKER'] + \
                       n_carts * LIGHT_UPKEEP['CART']
 

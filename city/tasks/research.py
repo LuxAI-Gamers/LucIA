@@ -11,4 +11,11 @@ class Research(Task):
 
     def run(self):
         object = self._blackboard.get_value('object')
-        return True if object.research() else False
+
+        research = object.research()
+        if research:
+            actions = self._blackboard.append_values(actions=research)
+            return True
+
+        return False
+

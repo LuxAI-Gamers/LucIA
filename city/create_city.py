@@ -9,23 +9,24 @@ from bh_trees import Inverter, Sequence, Selector
 
 def create_simple_city():
 
-    root = Selector()
+    root = Sequence()
 
     # 1st level
     check_sequence = root.add_child(Sequence())
-    research_sequence = root.add_child(Sequence())
-    root.add_child(CreateWorker())
+    action_selector = root.add_child(Selector())
 
     # 2nd level
-    not_can_act = check_sequence.add_child(Inverter())
-    not_enought_fuel = check_sequence.add_child(Inverter())
+    check_sequence.add_child(CanAct())
+    check_sequence.add_child(IsEnoughtFuel())
 
-    inverter = research_sequence.add_child(Inverter())
+    research_sequence = action_selector.add_child(Sequence())
+    action_selector.add_child(CreateWorker())
+
+    # 3rd level
+    not_researched = research_sequence.add_child(Inverter())
     reserch_node = research_sequence.add_child(Research())
 
-    # 3rt level
-    not_can_act.add_child(CanAct())
-    not_enought_fuel.add_child(IsEnoughtFuel())
-    is_researched = inverter.add_child(IsResourceResearched())
+    # 4th level
+    is_researched = not_researched.add_child(IsResourceResearched())
 
     return root

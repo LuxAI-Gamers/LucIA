@@ -10,6 +10,7 @@ from lux import annotate
 
 from bh_trees import BlackBoard
 from worker import create_dumb_worker
+from city import create_simple_city
 
 
 DIRECTIONS = Constants.DIRECTIONS
@@ -40,16 +41,18 @@ def agent(observation, configuration):
                   actions = []
                   )
 
-    worker = create_dumb_worker()
+    city_tree = create_simple_city()
+    worker_tree = create_dumb_worker()
 
 
-    for city in bb.get_value('player').cities:
-        for city_tile in city:
-            bb.set_values(object=city)
+    for city in bb.get_value('player').cities.values():
+        for city_tile in city.citytiles:
+            bb.set_values(object=city_tile)
+            city_tree.run()
 
     for unit in bb.get_value('player').units:
         bb.set_values(object=unit)
-        worker.run()
+        worker_tree.run()
 
     actions = bb.get_value('actions')
 

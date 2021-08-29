@@ -16,7 +16,7 @@ class IsEnoughtFuel(Task):
         LIGHT_UPKEEP=GAME_CONSTANTS['PARAMETERS']['LIGHT_UPKEEP']
 
         player = self._blackboard.get_value('player')
-        cities = player.cities
+        cities = player.cities.values()
         units = player.units
 
         fuel = sum([city.fuel for city in cities])
@@ -24,8 +24,8 @@ class IsEnoughtFuel(Task):
         n_carts = len([i for i in units if i.is_cart()])
         n_workers = len([i for i in units if i.is_worker()])
 
-        needed_fuel = n_tiles * LIGHT_UPKEEP['CITY'] +
-                      n_workers * LIGHT_UPKEEP['WORKER'] +
+        needed_fuel = n_tiles * LIGHT_UPKEEP['CITY'] + \
+                      n_workers * LIGHT_UPKEEP['WORKER'] + \
                       n_carts * LIGHT_UPKEEP['CART']
 
         return True if fuel>needed_fuel else False

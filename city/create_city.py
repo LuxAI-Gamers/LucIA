@@ -1,14 +1,13 @@
 from .tasks import CanAct
-from .tasks import Pillage
-from .tasks import IsCargoFull
-from .tasks import MoveToPosition
-from .tasks import FindNearestCity
-from .tasks import FindNearestResource
+from .tasks import Research
+from .tasks import CreateWorker
+from .tasks import IsEnoughtFuel
+from .tasks import IsResourceResearched
 
 from bh_trees import Inverter, Sequence, Selector
 
 
-def create_dumb_worker():
+def create_simple_city():
 
     root = Selector()
 
@@ -18,14 +17,15 @@ def create_dumb_worker():
     root.add_child(CreateWorker())
 
     # 2nd level
-    check_sequence.add_child(CanAct())
-    check_sequence.add_child(IsEnoughtFuel())
+    not_can_act = check_sequence.add_child(Inverter())
+    not_enought_fuel = check_sequence.add_child(Inverter())
 
     inverter = research_sequence.add_child(Inverter())
     reserch_node = research_sequence.add_child(Research())
 
     # 3rt level
-    is_researched = inverter.add_child(IsResearched())
-
+    not_can_act.add_child(CanAct())
+    not_enought_fuel.add_child(IsEnoughtFuel())
+    is_researched = inverter.add_child(IsResourceResearched())
 
     return root

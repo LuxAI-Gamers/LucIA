@@ -1,16 +1,24 @@
+import gc
+import sys
+import math
+
 from lux.game import Game
 from lux.game_map import Cell, RESOURCE_TYPES
 from lux.constants import Constants
 from lux.game_constants import GAME_CONSTANTS
 from lux import annotate
-import math
 
-# we declare this global game_state object so that state persists across turns so we do not need to reinitialize it all the time
+from bh_trees import BlackBoard
+from worker import create_dumb_worker
+
+
+DIRECTIONS = Constants.DIRECTIONS
 game_state = None
+bb = BlackBoard()
 
-# this is the basic agent definition. At the moment this agent does nothing (and actually will survive for a bit before getting consumed by darkness)
 def agent(observation, configuration):
     global game_state
+    global bb
 
     ### Do not edit ###
     if observation["step"] == 0:
@@ -18,14 +26,49 @@ def agent(observation, configuration):
         game_state._initialize(observation["updates"])
         game_state._update(observation["updates"][2:])
         game_state.id = observation.player
+
     else:
         game_state._update(observation["updates"])
-    
-    actions = []
 
-    ### AI Code goes down here! ### 
-    player = game_state.players[observation.player]
-    opponent = game_state.players[(observation.player + 1) % 2]
-    width, height = game_state.map.width, game_state.map.height
+    ### AI Code goes down here! ###
+    bb.set_values(id = game_state.id,
+                  map = game_state.map,
+                  turn = game_state.turn,
+                  width = game_state.map_width,
+                  height = game_state.map.height,
+                  player = game_state.players[observation.player],
+                  actions = []
+                  )
+
+    worker = create_dumb_worker()
+
+
+    for city in bb.get_value('player').cities:
+        bb.set_values(object=city)
+
+    for unit in bb.get_value('player').units:
+        bb.set_values(object=unit)
+        worker.run()
+
+    actions = bb.get_value('actions')
 
     return actions
+
+
+if __name__=='__main__':
+
+    import json
+    from kaggle_environments import make
+
+    env = make("lux_ai_2021",
+               configuration={"seed": 562124210,
+                              "loglevel": 2,
+                              "annotations": True},
+               debug=True)
+
+    steps = env.run([agent, "simple_agent"])
+    print([step[0]['action'] for step in steps])
+
+#    replay = env.toJSON()
+#    with open("replay.json", "w") as f:
+#        json.dump(replay, f)

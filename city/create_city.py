@@ -10,7 +10,7 @@ from bh_trees import Inverter, Sequence, Selector
 
 
 def create_simple_city():
-
+  
     graph = {
         Sequence(): {
             Sequence(): {

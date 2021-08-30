@@ -1,4 +1,3 @@
-import sys
 import math
 
 from lux.constants import Constants

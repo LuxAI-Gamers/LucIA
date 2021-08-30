@@ -4,10 +4,11 @@ from .tasks import IsCargoFull
 from .tasks import MoveToPosition
 from .tasks import FindNearestCity
 from .tasks import FindNearestResource
+from .tasks import CanBuildCityTile
+from .tasks import BuildCityTile
 
 from bh_trees import recursive_build
 from bh_trees import Inverter, Sequence, Selector
-
 
 def create_dumb_worker():
 
@@ -18,10 +19,10 @@ def create_dumb_worker():
                 },
             Sequence(): {
                 IsCargoFull(): {},
-#                Sequence(): {
-#                   CanBuildCityTile(): {},
-#                   BuildCityTile(): {}
-#                    },
+                Sequence(): {
+                   CanBuildCityTile(): {},
+                   BuildCityTile(): {}
+                    },
                 FindNearestCity(): {},
                 MoveToPosition(): {}
                },

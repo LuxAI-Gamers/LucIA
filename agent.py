@@ -9,7 +9,7 @@ from lux.game_constants import GAME_CONSTANTS
 from lux import annotate
 
 from bh_trees import BlackBoard
-from worker import create_dumb_worker
+from worker import create_simple_worker
 from city import create_simple_city
 
 
@@ -42,7 +42,7 @@ def agent(observation, configuration):
                   )
 
     city_tree = create_simple_city()
-    worker_tree = create_dumb_worker()
+    worker_tree = create_simple_worker()
 
 
     for city in bb.get_value('player').cities.values():

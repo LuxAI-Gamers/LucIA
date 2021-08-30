@@ -19,14 +19,14 @@ def create_simple_city():
                 },
             Selector(): {
                 Sequence(): {
+                    CanBuildWorker(): {},
+                    BuildWorker(): {}
+                    },
+                Sequence(): {
                     Inverter(): {
                         IsResourceResearched(): {}
                         },
                     Research(): {}
-                    },
-                Sequence(): {
-                    BuildWorker(): {},
-                    CanBuildWorker(): {}
                     }
                 }
             }

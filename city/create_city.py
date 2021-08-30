@@ -20,8 +20,8 @@ def create_simple_city():
     check_sequence.add_child(CanAct())
     check_sequence.add_child(IsEnoughtFuel())
 
-    research_sequence = action_selector.add_child(Sequence())
     worker_sequence   = action_selector.add_child(Sequence())
+    research_sequence = action_selector.add_child(Sequence())
 
     # 3rd level
     not_researched = research_sequence.add_child(Inverter())

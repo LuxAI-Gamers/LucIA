@@ -1,6 +1,3 @@
-import sys
-import math
-
 from bh_trees import Task
 
 from lux.game_constants import GAME_CONSTANTS

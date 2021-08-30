@@ -4,15 +4,20 @@ from bh_trees import Task
 class Pillage(Task):
 
 
-    def __init__(self):
-        super(Pillage, self).__init__()
+    def _init_(self):
+        super(Pillage, self)._init_()
 
     def run(self):
-        object = self._blackboard.get_value('object')
+        map = self._blackboard.get_value('map')
+        object = self._blackboard.get_value('object')        
 
-        pillage = object.pillage()
-        if pillage:
-            actions = self._blackboard.append_values(actions=pillage)
+        if self.is_in_resource(object, map):
+            pillage = object.pillage()
+            self._blackboard.append_values(actions=pillage)
             return True
 
         return False
+
+
+    def is_in_resource(self, object, map):
+        return map.get_cell_by_pos(object.pos).resource is not None

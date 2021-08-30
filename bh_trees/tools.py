@@ -2,7 +2,7 @@ def recursive_build(tree_graph):
     for parent, children in tree_graph.items():
         for child, grandson in children.items():
             parent.add_child(child)
-            recursive_tree({child: grandson})
+            recursive_build({child: grandson})
     return parent
 
 

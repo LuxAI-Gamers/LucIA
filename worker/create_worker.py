@@ -29,13 +29,11 @@ def create_simple_worker():
                     }
                },
             Selector(): {
-                Sequence(): {
-                    Pillage(): {}
-                    },
+                Pillage(): {}
                 Sequence(): {
                     FindNearestResource(): {},
                     MoveToPosition(): {}
-                    }            
+                    }
                 }
             }
         }

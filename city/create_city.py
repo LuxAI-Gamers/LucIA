@@ -33,3 +33,12 @@ def create_simple_city():
         }
 
     return recursive_build(graph)
+
+
+def create_night_city():
+
+    graph = {
+        Sequence():{}
+        }
+
+    return recursive_build(graph)

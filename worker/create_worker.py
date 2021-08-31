@@ -10,6 +10,7 @@ from .tasks import BuildCityTile
 from bh_trees import recursive_build
 from bh_trees import Inverter, Sequence, Selector
 
+
 def create_simple_worker():
 
     graph = {
@@ -29,7 +30,32 @@ def create_simple_worker():
                     }
                },
             Selector(): {
-                Pillage(): {}
+                Pillage(): {},
+                Sequence(): {
+                    FindNearestResource(): {},
+                    MoveToPosition(): {}
+                    }
+                }
+            }
+        }
+
+    return recursive_build(graph)
+
+
+def create_night_worker():
+
+    graph = {
+        Selector(): {
+            Inverter(): {
+                CanAct(): {}
+                },
+            Sequence(): {
+                IsCargoFull(): {},
+                FindNearestCity(): {},
+                MoveToPosition(): {}
+               },
+            Selector(): {
+                Pillage(): {},
                 Sequence(): {
                     FindNearestResource(): {},
                     MoveToPosition(): {}

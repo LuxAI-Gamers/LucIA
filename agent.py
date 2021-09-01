@@ -9,8 +9,8 @@ from lux.game_constants import GAME_CONSTANTS
 from lux import annotate
 
 from bh_trees import BlackBoard
-from worker import create_simple_worker
-from city import create_simple_city
+from worker import create_simple_worker, create_night_worker
+from city import create_simple_city, create_night_city
 
 
 DIRECTIONS = Constants.DIRECTIONS
@@ -41,9 +41,13 @@ def agent(observation, configuration):
                   actions = []
                   )
 
-    city_tree = create_simple_city()
-    worker_tree = create_simple_worker()
+    if game_state.turn%40<=30:
+        city_tree = create_simple_city()
+        worker_tree = create_simple_worker()
 
+    if game_state.turn%40>30:
+        city_tree = create_night_city()
+        worker_tree = create_night_worker()
 
     for city in bb.get_value('player').cities.values():
         for city_tile in city.citytiles:

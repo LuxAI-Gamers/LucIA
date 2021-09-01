@@ -2,7 +2,6 @@ from .tasks import CanAct
 from .tasks import Research
 from .tasks import BuildWorker
 from .tasks import IsEnoughtFuel
-from .tasks import CanBuildWorker
 from .tasks import IsResourceResearched
 
 from bh_trees import recursive_build
@@ -18,10 +17,7 @@ def create_simple_city():
                 IsEnoughtFuel(): {}
                 },
             Selector(): {
-                Sequence(): {
-                    CanBuildWorker(): {},
-                    BuildWorker(): {}
-                    },
+                BuildWorker(): {},
                 Sequence(): {
                     Inverter(): {
                         IsResourceResearched(): {}

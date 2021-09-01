@@ -19,8 +19,8 @@ if __name__=='__main__':
                 MoveToPosition(): {}
                 },
             Sequence(): {
-                BuildCityTile(): {},
                 CanBuildCityTile(): {}},
+                BuildCityTile(): {},
             Sequence(): {
                 FindNearestResource(): {},
                 Selector(): {

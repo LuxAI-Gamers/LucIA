@@ -1,10 +1,8 @@
 from typing import Dict
 import sys
 from agent import agent
-
-
 if __name__ == "__main__":
-
+    
     def read_input():
         """
         Reads input from stdin

@@ -32,15 +32,8 @@ def agent(observation, configuration):
         game_state._update(observation["updates"])
 
     ### AI Code goes down here! ###
-    bb.set_values(id = game_state.id,
-                  map = game_state.map,
-                  turn = game_state.turn,
-                  width = game_state.map_width,
-                  height = game_state.map.height,
-                  player = game_state.players[observation.player],
-                  actions = []
-                  )
 
+    # Set day and night behavior
     if game_state.turn%40<=30:
         city_tree = create_simple_city()
         worker_tree = create_simple_worker()
@@ -49,11 +42,33 @@ def agent(observation, configuration):
         city_tree = create_night_city()
         worker_tree = create_night_worker()
 
+
+    # Build units map
+    player = game_state.players[observation.player]
+    oponent = game_state.players[(observation.player+1)%2]
+
+    units_map = [[None]*game_state.map_width]*game_state.map_height
+    for unit in player.units+oponent.units:
+        units_map[unit.pos.y][unit.pos.x] = [unit.team, unit.type]
+
+
+    bb.set_values(id = game_state.id,
+                  map = game_state.map,
+                  units_map = units_map,
+                  turn = game_state.turn,
+                  width = game_state.map_width,
+                  height = game_state.map.height,
+                  player = game_state.players[observation.player],
+                  actions = []
+                  )
+
+    # Run cities
     for city in bb.get_value('player').cities.values():
         for city_tile in city.citytiles:
             bb.set_values(object=city_tile)
             city_tree.run()
 
+    # Run units
     for unit in bb.get_value('player').units:
         bb.set_values(object=unit)
         worker_tree.run()

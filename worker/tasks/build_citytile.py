@@ -8,10 +8,12 @@ class BuildCityTile(Task):
 
     def run(self):
         object = self._blackboard.get_value('object')
+        game_map = self._blackboard.get_value('map')
 
-        build = object.build_city()
-        if build:
-            actions = self._blackboard.append_values(actions=build)
+        # Condition if it can build
+        if object.can_build(game_map):
+            build = object.build_city()
+            self._blackboard.append_values(actions=build)
             return True
         return False
         

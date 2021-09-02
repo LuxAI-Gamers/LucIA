@@ -18,9 +18,7 @@ if __name__=='__main__':
                 IsCargoFull(): {},
                 MoveToPosition(): {}
                 },
-            Sequence(): {
-                BuildCityTile(): {},
-                CanBuildCityTile(): {}},
+            BuildCityTile(): {},
             Sequence(): {
                 FindNearestResource(): {},
                 Selector(): {

@@ -4,7 +4,6 @@ from .tasks import IsCargoFull
 from .tasks import MoveToPosition
 from .tasks import FindNearestCity
 from .tasks import FindNearestResource
-from .tasks import CanBuildCityTile
 from .tasks import BuildCityTile
 
 from bh_trees import recursive_build
@@ -22,10 +21,7 @@ def create_simple_worker():
                 IsCargoFull(): {},
                 FindNearestCity(): {},
                 Selector(): {
-                    Sequence(): {
-                        CanBuildCityTile(): {},
-                        BuildCityTile(): {}
-                        },
+                    BuildCityTile(): {},
                     MoveToPosition(): {}
                     }
                },

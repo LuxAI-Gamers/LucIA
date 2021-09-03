@@ -47,9 +47,16 @@ def agent(observation, configuration):
     player = game_state.players[observation.player]
     oponent = game_state.players[(observation.player+1)%2]
 
-    units_map = [[None]*game_state.map_width]*game_state.map_height
-    for unit in player.units+oponent.units:
+
+    units_map = [None] * game_state.map_height
+    for y in range(0, game_state.map_height):
+        units_map[y] = [None] * game_state.map_width
+        for x in range(0, game_state.map_width):
+            units_map[y][x] = None
+
+    for unit in player.units + oponent.units:
         units_map[unit.pos.y][unit.pos.x] = [unit.team, unit.type]
+
 
 
     bb.set_values(id = game_state.id,

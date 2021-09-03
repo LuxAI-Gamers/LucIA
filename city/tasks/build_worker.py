@@ -18,7 +18,7 @@ class BuildWorker(Task):
         # Condition to build worker
         n_units = len(player.units)
         n_tiles = player.city_tile_count
-        if n_tiles>n_units:
+        if n_tiles>=n_units:
             build = object.build_worker()
             self._blackboard.append_values(actions=build)
             return True

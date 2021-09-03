@@ -16,4 +16,4 @@ class BuildCityTile(Task):
             self._blackboard.append_values(actions=build)
             return True
         return False
-        
+

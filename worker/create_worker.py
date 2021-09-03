@@ -1,8 +1,10 @@
 from .tasks import CanAct
 from .tasks import Pillage
 from .tasks import IsCargoFull
+from .tasks import IsCityNeeded
 from .tasks import MoveToPosition
 from .tasks import FindNearestCity
+from .tasks import FindNearestEmpty
 from .tasks import FindNearestResource
 from .tasks import BuildCityTile
 
@@ -19,12 +21,21 @@ def create_simple_worker():
                 },
             Sequence(): {
                 IsCargoFull(): {},
-                FindNearestCity(): {},
                 Selector(): {
-                    BuildCityTile(): {},
-                    MoveToPosition(): {}
+                    Selector(): {
+                        BuildCityTile(): {},
+                        Sequence(): {
+                            IsCityNeeded():{},
+                            FindNearestEmpty():{},
+                            MoveToPosition():{}
+                            }
+                        },
+                    Sequence(): {
+                        FindNearestCity(): {},
+                        MoveToPosition(): {}
+                        }
                     }
-               },
+                },
             Selector(): {
                 Pillage(): {},
                 Sequence(): {

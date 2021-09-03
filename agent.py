@@ -47,10 +47,20 @@ def agent(observation, configuration):
     player = game_state.players[observation.player]
     oponent = game_state.players[(observation.player+1)%2]
 
-    units_map = [[None]*game_state.map_width]*game_state.map_height
-    for unit in player.units+oponent.units:
+
+    units_map = [None] * game_state.map_height
+    for y in range(0, game_state.map_height):
+        units_map[y] = [None] * game_state.map_width
+        for x in range(0, game_state.map_width):
+            units_map[y][x] = None
+
+    for unit in player.units + oponent.units:
         units_map[unit.pos.y][unit.pos.x] = [unit.team, unit.type]
 
+
+    for city in game_state.players[(observation.player+1)%2].cities.values():
+        for city_tile in city.citytiles:
+            units_map[city_tile.pos.y][city_tile.pos.x] = [city_tile.team]
 
     bb.set_values(id = game_state.id,
                   map = game_state.map,
@@ -59,8 +69,10 @@ def agent(observation, configuration):
                   width = game_state.map_width,
                   height = game_state.map.height,
                   player = game_state.players[observation.player],
+                  n_units = len(game_state.players[observation.player].units),
                   actions = []
                   )
+
 
     # Run cities
     for city in bb.get_value('player').cities.values():
@@ -68,10 +80,12 @@ def agent(observation, configuration):
             bb.set_values(object=city_tile)
             city_tree.run()
 
+
     # Run units
     for unit in bb.get_value('player').units:
         bb.set_values(object=unit)
         worker_tree.run()
+
 
     actions = bb.get_value('actions')
 

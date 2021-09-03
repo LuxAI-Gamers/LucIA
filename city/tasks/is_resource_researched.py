@@ -8,4 +8,4 @@ class IsResourceResearched(Task):
 
     def run(self):
         player = self._blackboard.get_value('player')
-        return True if player.researched_uranium() else False
+        return player.researched_uranium()

@@ -1,3 +1,5 @@
+import random
+
 from bh_trees import Task
 from lux.constants import Constants
 
@@ -11,16 +13,17 @@ class MoveToPosition(Task):
             Constants.DIRECTIONS.WEST,
         ]
 
+
     def __init__(self):
         super(MoveToPosition, self).__init__()
 
 
     def run(self):
 
+        turn = self._blackboard.get_value('turn')
         object = self._blackboard.get_value('object')
         source_position = self._blackboard.get_value('object').pos
         target_position = self._blackboard.get_value('position')
-
 
         closest_distance = self.get_closest_dist(source_position,
                                                  target_position)
@@ -30,7 +33,8 @@ class MoveToPosition(Task):
                                                        closest_distance)
 
         direction = self.get_final_position(posible_positions,
-                                                    object)
+                                            object)
+
         updated = self.update_blackboard(direction,
                                          object)
 
@@ -56,28 +60,33 @@ class MoveToPosition(Task):
                                    closest_distance):
 
         posible_pos = []
+        random.shuffle(self.DIRECTIONS)
+
         for dir in self.DIRECTIONS:
             new_pos = source_position.translate(dir, 1)
             new_dis = target_position.distance_to(new_pos)
 
             if new_dis == closest_distance:
-                posible_pos.insert(0,new_pos)
+                posible_pos = [new_pos] + posible_pos
             else:
-                posible_pos.insert(-1,new_pos)
+                posible_pos = posible_pos + [new_pos]
 
         return posible_pos
 
 
     def get_final_position(self,posible_pos,object):
 
+
+        width = self._blackboard.get_value('width')
+        height = self._blackboard.get_value('height')
         units_map = self._blackboard.get_value('units_map')
 
         direction = None
         for pos in posible_pos:
-            if units_map[pos.y][pos.x] is None:
-                direction = object.pos.direction_to(pos)
-                break
-
+            if pos.x>=0 and pos.x<width and pos.y>=0 and pos.y<height:
+                if units_map[pos.y][pos.x] is None:
+                    direction = object.pos.direction_to(pos)
+                    break
         return direction
 
 
@@ -89,11 +98,13 @@ class MoveToPosition(Task):
             movement  = object.move(direction)
 
             units_map = self._blackboard.get_value('units_map')
-            units_map[new_pos.y][new_pos.x] = 1
-            units_map[old_pos.y][old_pos.y] = None
+            units_map[new_pos.y][new_pos.x] = [object.team, object.type]
+            units_map[old_pos.y][old_pos.x] = None
 
             self._blackboard.set_values(units_map=units_map)
             self._blackboard.append_values(actions=movement)
+            self._blackboard.set_values(position=None)
             return True
         else:
+            self._blackboard.set_values(position=None)
             return False

@@ -8,8 +8,8 @@ class Research(Task):
 
     def run(self):
         object = self._blackboard.get_value('object')
-
         research = object.research()
+
         if research:
             actions = self._blackboard.append_values(actions=research)
             return True

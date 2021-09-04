@@ -45,6 +45,9 @@ class FindNearestResource(Task):
     def find_closest_resources(self, object, player):
         """
         """
+
+        tiles_assigned = self._blackboard.get_value('tiles_assigned')
+
         closest_dist = math.inf
         closest_resource_tile = None
         for resource_tile in self._resource_tiles:
@@ -55,6 +58,9 @@ class FindNearestResource(Task):
 
             if (resource_tile.resource.type == Constants.RESOURCE_TYPES.URANIUM
                 and not player.researched_uranium()):
+                continue
+
+            if resource_tile.pos in tiles_assigned:
                 continue
 
             dist = resource_tile.pos.distance_to(object.pos)

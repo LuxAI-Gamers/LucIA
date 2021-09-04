@@ -47,7 +47,7 @@ class LucIA():
         self._width = game_state.map_width
         self._height = game_state.map.height
         self._player = game_state.players[observation.player]
-        self._opponent = game_state.players[observation.player]
+        self._opponent = game_state.players[(observation.player+1)%2]
         self._n_units = len(game_state.players[observation.player].units)
 
 
@@ -125,5 +125,6 @@ class LucIA():
                               height = self._height,
                               player = self._player,
                               n_units = self._n_units,
-                              units_map = self._units_map
+                              units_map = self._units_map,
+                              tiles_assigned = []
                               )

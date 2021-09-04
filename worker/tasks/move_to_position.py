@@ -36,7 +36,8 @@ class MoveToPosition(Task):
                                             object)
 
         updated = self.update_blackboard(direction,
-                                         object)
+                                         object,
+                                         target_position)
 
         return True if updated else False
 
@@ -90,7 +91,7 @@ class MoveToPosition(Task):
         return direction
 
 
-    def update_blackboard(self, direction, object):
+    def update_blackboard(self, direction, object, target_position):
 
         if direction:
             old_pos = object.pos
@@ -103,6 +104,7 @@ class MoveToPosition(Task):
 
             self._blackboard.set_values(units_map=units_map)
             self._blackboard.append_values(actions=movement)
+            self._blackboard.append_values(tiles_assigned=target_position)
             self._blackboard.set_values(position=None)
             return True
         else:

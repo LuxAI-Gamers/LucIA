@@ -4,16 +4,10 @@
 
 Build:
 ```
-docker build -t lucia:dev .
+docker build -t lux_playground:dev .
 ```
 
 Run a container and open a bash terminal:
 ```
-docker run -p 8888:8888 -it --rm lux_ai:dev bash
+docker run -v $(pwd):/root -p 8888:8888 -it --rm lux_playground:dev
 ```
-
-Once your inside the container, you can run jupyter this way:
-```
-jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --allow-root
-```
-

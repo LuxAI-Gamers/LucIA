@@ -45,6 +45,8 @@ RUN ln -s pip3 /usr/bin/pip
 
 ### LucIA setup ###
 WORKDIR /root
-COPY . .
+COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
+### Execute jupyter notebook
+ENTRYPOINT jupyter notebook visualizer.ipynb --port=8888 --no-browser --ip=0.0.0.0 --allow-root

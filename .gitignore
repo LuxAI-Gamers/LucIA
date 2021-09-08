@@ -189,3 +189,9 @@ cython_debug/
 ### LUX-AI ###
 
 replay.json
+
+# Bash
+.bash_history
+
+# Jupyter
+.jupyter

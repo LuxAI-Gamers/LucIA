@@ -12,36 +12,30 @@ from bh_trees import recursive_build
 from bh_trees import Inverter, Sequence, Selector
 
 
-def create_simple_worker():
+def create_day_worker():
 
     graph = {
-        Selector(): {
-            Inverter(): {
-                CanAct(): {}
-                },
-            Sequence(): {
-                IsCargoFull(): {},
-                Selector(): {
-                    Selector(): {
-                        BuildCityTile(): {},
-                        Sequence(): {
-                            IsCityNeeded():{},
-                            FindNearestEmpty():{},
-                            MoveToPosition():{}
-                            }
-                        },
-                    Sequence(): {
-                        FindNearestCity(): {},
-                        MoveToPosition(): {}
-                        }
-                    }
+        Sequence(): {
+            CanAct(): {},
+            Selector(): {
+                Sequence(): {
+                    IsCargoFull(): {},
+                    IsCityNeeded(): {},
+                    FindNearestEmpty(): {}
+                    },
+                Sequence(): {
+                    IsCargoFull(): {},
+                    FindNearestCity(): {}
+                    },
+                FindNearestResource(): {}
                 },
             Selector(): {
-                Pillage(): {},
                 Sequence(): {
-                    FindNearestResource(): {},
-                    MoveToPosition(): {}
-                    }
+                    IsCargoFull(): {},
+                    BuildCityTile(): {}
+                    },
+                Pillage(): {},
+                MoveToPosition(): {}
                 }
             }
         }
@@ -52,21 +46,18 @@ def create_simple_worker():
 def create_night_worker():
 
     graph = {
-        Selector(): {
-            Inverter(): {
-                CanAct(): {}
+        Sequence(): {
+            CanAct(): {},
+            Selector(): {
+                Sequence(): {
+                    IsCargoFull(): {},
+                    FindNearestCity(): {},
+                    },
+                FindNearestResource(): {}
                 },
-            Sequence(): {
-                IsCargoFull(): {},
-                FindNearestCity(): {},
-                MoveToPosition(): {}
-               },
             Selector(): {
                 Pillage(): {},
-                Sequence(): {
-                    FindNearestResource(): {},
-                    MoveToPosition(): {}
-                    }
+                MoveToPosition(): {}
                 }
             }
         }

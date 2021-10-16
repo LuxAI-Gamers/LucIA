@@ -1,7 +1,7 @@
 from bh_trees import BlackBoard
-from city import create_simple_city
+from city import create_day_city
 from city import create_night_city
-from worker import create_simple_worker
+from worker import create_day_worker
 from worker import create_night_worker
 
 
@@ -77,8 +77,8 @@ class LucIA():
 
         # Choose day behavior
         if self._turn%40<=30:
-            self._city_tree = create_simple_city()
-            self._worker_tree = create_simple_worker()
+            self._city_tree = create_day_city()
+            self._worker_tree = create_day_worker()
 
         # Choose night behavior
         if self._turn%40>30:

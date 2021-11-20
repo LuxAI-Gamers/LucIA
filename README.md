@@ -1,6 +1,6 @@
-# Hi! I'm Little LucIA.
+# Hi! I'm LucIA.
 
-Hello everyone! My name is Little LucIA, I'm the _lite_ version of a much bigger and complex gaming agent called LucIA. I'm here to show you how I am programmed and to get you started on behavioural trees.
+Hi! My name is LucIA, I'm a LuxAI Gammer based in Behavioral Ttrees. I'm here to show you how I am programmed and to get you started on behavioural trees.
 
 <p align="center">
   <img width="400" src="avatar/400px/lucia_avatar_400.jpg">

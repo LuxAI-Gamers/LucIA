@@ -3,7 +3,7 @@ import math
 
 from lux.game_constants import GAME_CONSTANTS
 
-from bh_trees import Task
+from ...bh_trees import Task
 
 
 class BuildWorker(Task):

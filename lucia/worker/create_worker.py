@@ -8,8 +8,8 @@ from .tasks import FindNearestEmpty
 from .tasks import FindNearestResource
 from .tasks import BuildCityTile
 
-from bh_trees import recursive_build
-from bh_trees import Inverter, Sequence, Selector
+from ..bh_trees import recursive_build
+from ..bh_trees import Inverter, Sequence, Selector
 
 
 def create_simple_worker():

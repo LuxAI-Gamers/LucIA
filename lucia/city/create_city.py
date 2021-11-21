@@ -4,8 +4,8 @@ from .tasks import BuildWorker
 from .tasks import IsEnoughtFuel
 from .tasks import IsResourceResearched
 
-from bh_trees import recursive_build
-from bh_trees import Inverter, Sequence, Selector
+from ..bh_trees import recursive_build
+from ..bh_trees import Inverter, Sequence, Selector
 
 
 def create_simple_city():

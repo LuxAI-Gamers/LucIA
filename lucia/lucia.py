@@ -1,8 +1,8 @@
-from bh_trees import BlackBoard
-from city import create_simple_city
-from city import create_night_city
-from worker import create_simple_worker
-from worker import create_night_worker
+from .bh_trees import BlackBoard
+from .city import create_simple_city
+from .city import create_night_city
+from .worker import create_simple_worker
+from .worker import create_night_worker
 
 
 class LucIA():

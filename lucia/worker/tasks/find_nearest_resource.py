@@ -1,7 +1,7 @@
 import math
 
 from lux.constants import Constants
-from bh_trees import Task
+from ...bh_trees import Task
 
 
 class FindNearestResource(Task):

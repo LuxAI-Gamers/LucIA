@@ -1,4 +1,4 @@
-from bh_trees import Task
+from ...bh_trees import Task
 
 
 class IsCargoFull(Task):

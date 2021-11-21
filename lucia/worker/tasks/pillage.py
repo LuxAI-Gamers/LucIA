@@ -1,4 +1,4 @@
-from bh_trees import Task
+from ...bh_trees import Task
 
 
 class Pillage(Task):
@@ -9,7 +9,7 @@ class Pillage(Task):
 
     def run(self):
         map = self._blackboard.get_value('map')
-        object = self._blackboard.get_value('object')        
+        object = self._blackboard.get_value('object')
 
         if self.is_in_resource(object, map):
             pillage = object.pillage()

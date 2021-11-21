@@ -3,7 +3,7 @@
 Hi! My name is LucIA, I'm a LuxAI Gammer based in Behavioral Ttrees. I'm here to show you how I am programmed and to get you started on behavioural trees.
 
 <p align="center">
-  <img width="400" src="avatar/400px/lucia_avatar_400.jpg">
+  <img width="400" src="img/avatar/400px/lucia_avatar_400.jpg">
 </p>
 
 Before going any further into myself, I'm programmed to play the [Lux Kaggle Competition](https://www.lux-ai.org/). You can read all competition rules, this may be a bit of a learning curve and you can skip it if you are only interested _in me_ but make sure to read it before modify my behaviour. 

@@ -11,7 +11,7 @@ Before going any further into myself, I'm programmed to play the [Lux Kaggle Com
 
 ## What will you find in this project?
 
-As I said I am a lite version, I don't have all Lux rules implemented, you can check the rules and logic in the folder `doc`
+You can check the rules and logic in the folder `doc`
 
 - **City**: this is the behaviour logic for city actions. This means everytime a city is going to decide what to do in each turn it will follow this tree. First, we need to check if the city can make an action (there's a cooldown factor everytime an action is performed). If the city can act, then the action selector is _activated_ and one of both sequences is performed. The city will try to build a worker, if it can't it will turn over the reseach sequence. 
 
@@ -80,3 +80,8 @@ A behaviour tree is a model of a plan execution. They describe a series of tasks
 
 * We have a further description of how to use it [here](doc/README.md).
 * To know more here's [Wikipedia](https://en.wikipedia.org/wiki/Behavior_tree_(artificial_intelligence,_robotics_and_control)).
+
+
+## References (Spanish talk)
+
+* https://youtu.be/NiixJV3c7f4?t=3878
